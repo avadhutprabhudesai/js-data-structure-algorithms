@@ -69,6 +69,7 @@ class LinkedList {
       unwantedNode = pointerNode.next;
 
     pointerNode.next = unwantedNode.next;
+    this.tail = pointerNode;
 
     this.length--;
     return;
