@@ -29,6 +29,9 @@ class Stack {
     this.length++;
   }
   pop() {
+    if (!this.bottom) {
+      return null;
+    }
     let cursor = this.bottom;
     while (cursor.next !== this.top) {
       cursor = cursor.next;
