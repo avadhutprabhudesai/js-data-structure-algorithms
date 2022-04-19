@@ -30,8 +30,8 @@ class MyArray {
 
   insert(index, element) {
     if (index >= 0 && index < this.length) {
-      for (let i = index; i < this.length; i++) {
-        this.data[i + 1] = this.data[i];
+      for (let i = this.length; i > index; i--) {
+        this.data[i] = this.data[i - 1];
       }
       this.data[index] = element;
       this.length++;
@@ -40,7 +40,7 @@ class MyArray {
 
   delete(index) {
     if (index >= 0 && index < this.length) {
-      for (let i = index; i < this.length; i++) {
+      for (let i = index; i < this.length - 1; i++) {
         this.data[i] = this.data[i + 1];
       }
       delete this.data[this.length - 1];
