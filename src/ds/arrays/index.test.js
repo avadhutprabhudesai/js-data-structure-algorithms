@@ -29,13 +29,14 @@ describe('Testing Array data structure', () => {
     expect(arr.length).toBe(3);
   });
   it('inserts an element at a given position with insert method', () => {
-    arr.insert(0, 100);
-    expect(arr.get(0)).toBe(100);
+    arr.insert(2, 100);
+    expect(arr.get(2)).toBe(100);
+    expect(arr.get(3)).toBe(3);
     expect(arr.length).toBe(5);
   });
   it('deletes an element from a given position with delete method', () => {
-    arr.delete(0);
-    expect(arr.get(0)).toBe(2);
+    arr.delete(2);
+    expect(arr.get(2)).toBe(4);
     expect(arr.length).toBe(3);
   });
 });
