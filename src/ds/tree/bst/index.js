@@ -13,11 +13,11 @@ class BinarySearchTree {
   }
 
   insert(value) {
+    let newNode = new Node(value);
     if (!this.root) {
-      this.root = new Node(value);
+      this.root = newNode;
       return;
     }
-    let newNode = new Node(value);
     let node = this.root;
 
     while (true) {
@@ -27,7 +27,7 @@ class BinarySearchTree {
       } else {
         dir = 'right';
       }
-      if (node[dir]) {
+      if (node[dir] !== null) {
         node = node[dir];
       } else {
         node[dir] = newNode;
@@ -39,10 +39,12 @@ class BinarySearchTree {
 
   lookup(value) {
     let node = this.root;
+    let result = null;
 
     while (node) {
       if (node.value === value) {
-        return node;
+        result = node;
+        break;
       } else {
         let dir;
         if (value < node.value) {
@@ -53,7 +55,7 @@ class BinarySearchTree {
         node = node[dir];
       }
     }
-    return node;
+    return result;
   }
 
   findSuccessorNode(root) {
@@ -108,6 +110,46 @@ class BinarySearchTree {
         current = current[dir];
       }
     }
+  }
+
+  clean() {
+    this.root = null;
+  }
+
+  breadthFirstSearch() {
+    let list = [],
+      queue = [];
+    let currentNode = this.root;
+    queue.push(currentNode);
+    while (queue.length > 0) {
+      currentNode = queue.shift();
+      list.push(currentNode.value);
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+    return list;
+  }
+  breadthFirstSearchR(queue, list) {
+    // break condition
+    if (!queue.length) {
+      return list;
+    }
+
+    let currentNode = queue.shift();
+
+    list.push(currentNode.value);
+    if (currentNode.left !== null) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right !== null) {
+      queue.push(currentNode.right);
+    }
+
+    return this.breadthFirstSearchR(queue, list);
   }
 }
 export const traverse = (node) => {
