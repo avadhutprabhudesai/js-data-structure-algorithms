@@ -18,6 +18,10 @@ beforeEach(() => {
   // 9,4,20,1,6,15,100
 });
 
+afterEach(() => {
+  bst.clean();
+});
+
 describe('Testing BST', () => {
   it('inserts an item in BST', () => {
     bst.insert(90);
@@ -83,5 +87,14 @@ describe('Testing BST', () => {
     expect(bst.lookup(27).left.value).toBe(15);
     expect(bst.lookup(27).right.value).toBe(100);
     expect(bst.lookup(35).left).toBe(null);
+  });
+
+  it('traverses bst using imperative BFS', () => {
+    expect(bst.breadthFirstSearch()).toEqual([9, 4, 20, 1, 6, 15, 100]);
+  });
+  it('traverses bst using recursive BFS', () => {
+    expect(bst.breadthFirstSearchR([bst.root], [])).toEqual([
+      9, 4, 20, 1, 6, 15, 100,
+    ]);
   });
 });
