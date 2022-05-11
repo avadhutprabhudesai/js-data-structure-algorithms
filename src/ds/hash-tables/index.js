@@ -11,12 +11,12 @@ class HashTable {
     }, 0);
   };
 
-  _mapValToBucket = (val) => {
+  _mapHashToBucket = (val) => {
     return val % this.buckets.length;
   };
 
   _generateHashFromKey = (key) => {
-    return pipe(this._generateHash, this._mapValToBucket)(key);
+    return pipe(this._generateHash, this._mapHashToBucket)(key);
   };
   _getBucketByHash = (hash) => {
     return this.buckets[hash];
@@ -25,6 +25,11 @@ class HashTable {
 
   set(key, val) {
     const bucket = this._getBucketFromKey(key);
+
+    const isKeyPresent = bucket.some((k) => Object.keys(k).includes(key));
+    if (isKeyPresent) {
+      throw new Error('Hashtable cannnot have duplicate keys');
+    }
     bucket.push({ [key]: val });
   }
   get(key) {

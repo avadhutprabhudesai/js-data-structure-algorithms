@@ -7,7 +7,7 @@ import Stack from '.';
 
 let stack;
 beforeEach(() => {
-  stack = new Stack(10);
+  stack = new Stack(10, 10);
 });
 
 describe('Testing Stack', () => {
@@ -35,5 +35,33 @@ describe('Testing Stack', () => {
     stack.push(30);
     expect(stack.peek()).toEqual(30);
     expect(stack.length).toEqual(3);
+  });
+  it('underflows the stack', () => {
+    try {
+      stack.pop();
+      stack.pop();
+      stack.pop();
+      console.log(stack);
+    } catch (error) {
+      expect(error.message).toBe('Stack underflow');
+    }
+  });
+  it('overflows the stack', () => {
+    try {
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+      stack.push(5);
+    } catch (error) {
+      expect(error.message).toBe('Stack overflow');
+    }
   });
 });

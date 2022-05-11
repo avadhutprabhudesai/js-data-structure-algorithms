@@ -11,34 +11,48 @@ class Stack {
   top = null;
   bottom = null;
   length = 0;
+  size = 0;
 
-  constructor(value) {
+  constructor(value, size) {
+    if (!size) {
+      throw new Error('Size of the stack must be specified');
+    }
     let newNode = new Node(value);
     this.top = newNode;
     this.bottom = this.top;
     this.length++;
+    this.size = size;
   }
 
   peek() {
     return this.top.value;
   }
   push(value) {
+    if (this.length === this.size) {
+      throw new Error('Stack overflow');
+    }
     let newNode = new Node(value);
     this.top.next = newNode;
     this.top = newNode;
     this.length++;
   }
   pop() {
-    if (!this.bottom) {
-      return null;
+    if (this.length === 0) {
+      throw Error('Stack underflow');
     }
     let cursor = this.bottom;
-    while (cursor.next !== this.top) {
+    while (cursor && cursor.next !== this.top) {
       cursor = cursor.next;
     }
+
     let toReturn = this.top;
-    this.top = cursor;
-    this.top.next = null;
+    if (this.length === 1) {
+      this.top = null;
+      this.bottom = null;
+    } else {
+      this.top = cursor;
+      this.top.next = null;
+    }
     this.length--;
     return toReturn.value;
   }

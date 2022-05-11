@@ -22,4 +22,14 @@ describe('Testing Hash Tables', () => {
     expect(hashTable.get('apples')).toBeUndefined();
     expect(hashTable.get('bananas')).toEqual(100);
   });
+
+  it.only('checks for duplicate key', () => {
+    try {
+      hashTable.set('orange', 1000);
+      hashTable.set('orange', 1000);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('Hashtable cannnot have duplicate keys');
+    }
+  });
 });
