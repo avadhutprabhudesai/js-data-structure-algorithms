@@ -1,4 +1,9 @@
-import BinarySearchTree, { traverse } from '.';
+import BinarySearchTree, {
+  inOrderTraverse,
+  postOrderTraverse,
+  preOrderTraverse,
+  traverse,
+} from '.';
 
 /**
  *  insert
@@ -96,5 +101,14 @@ describe('Testing BST', () => {
     expect(bst.breadthFirstSearchR([bst.root], [])).toEqual([
       9, 4, 20, 1, 6, 15, 100,
     ]);
+  });
+  it('traverses bst in preorder', () => {
+    expect(preOrderTraverse(bst.root, [])).toEqual([9, 4, 1, 6, 20, 15, 100]);
+  });
+  it('traverses bst in inorder', () => {
+    expect(inOrderTraverse(bst.root, [])).toEqual([1, 4, 6, 9, 15, 20, 100]);
+  });
+  it('traverses bst in postorder', () => {
+    expect(postOrderTraverse(bst.root, [])).toEqual([1, 6, 4, 15, 100, 20, 9]);
   });
 });
