@@ -1,4 +1,5 @@
 import BinarySearchTree, {
+  calculateHeight,
   inOrderTraverse,
   postOrderTraverse,
   preOrderTraverse,
@@ -20,7 +21,11 @@ beforeEach(() => {
   bst.insert(15);
   bst.insert(100);
 
-  // 9,4,20,1,6,15,100
+  /**
+   *                    9
+   *                   4       20
+   *                 1   6   15  100
+   */
 });
 
 afterEach(() => {
@@ -110,5 +115,12 @@ describe('Testing BST', () => {
   });
   it('traverses bst in postorder', () => {
     expect(postOrderTraverse(bst.root, [])).toEqual([1, 6, 4, 15, 100, 20, 9]);
+  });
+  it('calculates the height of the tree', () => {
+    expect(calculateHeight(bst.root)).toBe(3);
+    bst.insert(120);
+    expect(calculateHeight(bst.root)).toBe(4);
+    bst.remove(120);
+    expect(calculateHeight(bst.root)).toBe(3);
   });
 });
