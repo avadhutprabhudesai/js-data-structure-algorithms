@@ -1,4 +1,4 @@
-import Stack from '.';
+import Stack, { deleteMiddleElement, reverseStack, sort, sortStack } from '.';
 /**
  * push
  * pop
@@ -63,5 +63,40 @@ describe('Testing Stack', () => {
     } catch (error) {
       expect(error.message).toBe('Stack overflow');
     }
+  });
+  it('reverses the stack', () => {
+    stack.push(5);
+    stack.push(4);
+    const reversedStack = reverseStack(stack);
+    expect(reversedStack.peek()).toBe(10);
+    stack.pop();
+    expect(reversedStack.peek()).toBe(5);
+    stack.pop();
+    expect(reversedStack.peek()).toBe(4);
+  });
+
+  it('deletes the middle element in odd length stack', () => {
+    stack.push(20);
+    stack.push(30);
+    stack.push(40);
+    stack.push(50);
+    const modified = deleteMiddleElement(stack);
+    expect(modified.toArray()).toEqual([10, 20, 40, 50]);
+  });
+  it('deletes the middle element in even length stack', () => {
+    stack.push(20);
+    stack.push(30);
+    stack.push(40);
+    const modified = deleteMiddleElement(stack);
+    expect(modified.toArray()).toEqual([10, 30, 40]);
+  });
+  it('sorts a given stack using recursion', () => {
+    stack.push(2);
+    stack.push(15);
+    stack.push(9);
+    stack.push(30);
+    stack.push(1);
+    const sorted = sort(stack);
+    expect(sorted.toArray()).toEqual([1, 2, 9, 10, 15, 30]);
   });
 });

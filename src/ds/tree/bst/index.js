@@ -197,4 +197,22 @@ export const traverse = (node) => {
   return tree;
 };
 
+export const calculateHeight = (node) => {
+  /**
+   * ===base case
+   * node === null return 0
+   *
+   *
+   * ===hypothesis
+   * Math.max(calculateHeight(leftChild), calculateHeight(rightChild))
+   *
+   *
+   * ===induction
+   * 1 + hypothesis
+   */
+  if (node === null) return 0;
+
+  return 1 + Math.max(calculateHeight(node.left), calculateHeight(node.right));
+};
+
 export default BinarySearchTree;
